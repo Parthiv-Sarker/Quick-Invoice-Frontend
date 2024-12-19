@@ -8,14 +8,24 @@ import {
     DashboardPage,
     NotFoundPage,
 } from "./pages";
+import Dashboard from "./features/dashboard/Dashboard";
+
+import ProtectedRoutes from "./routes/ProtectedRoutes";
 
 const App = () => {
     return (
         <Router>
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/signup" element={<SignupPage />} />
-                <Route path="/login" element={<LoginPage />} />
+
+                <Route element={<ProtectedRoutes />}>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignupPage />} />
+
+                    <Route path="/dashboard" element={<DashboardPage />}>
+                        <Route index element={<Dashboard />} />
+                    </Route>
+                </Route>
 
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
