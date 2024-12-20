@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 
 const ProtectedRoutes = () => {
     const { isLoggedIn } = useAuth();
+    console.log(isLoggedIn);
     
     const location = useLocation();
     const currentPath = location.pathname; 

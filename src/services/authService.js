@@ -16,7 +16,7 @@ const authService = {
     login: async (credentials) => {
         try {
             const response = await axios.post("/users/login", credentials);
-            cookieService.setCookie("logged_in", true);
+            cookieService.setCookie("logged_in", "yes");
             return response.data;
         } catch (error) {
             return error.response.data;

@@ -1,17 +1,14 @@
 import Cookies from "js-cookie";
 
-const isProduction = import.meta.env.VITE_API_NODE_ENV === "production";
-
 const cookieService = {
     // Set a cookie with name, value, and options
     setCookie: (name, value, options = { expires: 1, path: "/" }) => {
+        const isSecure = window.location.protocol === "http:";
+
         const cookieOptions = {
             ...options,
-            secure: isProduction,
+            secure: isSecure,
             sameSite: "None",
-            domain: isProduction
-                ? import.meta.env.VITE_API_BACKEND_BASE_URL
-                : undefined,
         };
 
         Cookies.set(name, value, cookieOptions);
@@ -25,7 +22,6 @@ const cookieService = {
         name,
         options = {
             path: "/",
-            domain: import.meta.env.VITE_API_BACKEND_BASE_URL,
         }
     ) => {
         Cookies.remove(name, options);

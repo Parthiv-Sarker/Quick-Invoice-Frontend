@@ -12,13 +12,18 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         setIsLoggedIn(cookieService.getCookie("logged_in") === "yes");
+
         const fetchUser = async () => {
             try {
-                const response = await authService.isAuthenticate();
-                setUser(response.data);
-                cookieService.setCookie("logged_in", "yes");
+                const response = await authService.isAuthenticate();                
+                if (response.success) {
+                    setUser(response.data);
+                    setIsLoggedIn(true);
+                    cookieService.setCookie("logged_in", "yes");                    
+                }
             } catch (error) {
                 setUser(null);
+                setIsLoggedIn(false);
                 cookieService.removeCookie("logged_in");
             }
         };
