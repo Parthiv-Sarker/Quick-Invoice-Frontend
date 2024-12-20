@@ -15,7 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 // ===== Services =====
-// import { signUpService } from "@/services/authService";
+import authService from "@/services/authService";
+
 
 const Signup = () => {
     const { toast } = useToast();
@@ -25,6 +26,7 @@ const Signup = () => {
         email: "",
         username: "",
         password: "",
+        confirmPassword: "",
     });
 
     const handleChange = (e) => {
@@ -49,14 +51,19 @@ const Signup = () => {
         }
 
         try {
-            // await signUpService(formData);
-            toast({
-                title: "Success",
-                description: "Signup successful!",
-                variant: "success",
-                className: "bg-green-500/90",
-            });
-            navigate("/login", { replace: true });
+            const response = await authService.signup(formData);
+            
+            if (response?.success) {
+                toast({
+                    title: "Success",
+                    description: response.message || "Signup successful.",
+                    variant: "success",
+                    className: "bg-green-500",
+                });
+                navigate("/login", { replace: true });
+            } else {
+                throw new Error(response?.message || "Signup failed.");
+            }
         } catch (error) {
             toast({
                 title: "Signup Error",

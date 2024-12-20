@@ -13,7 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 // ===== Services =====
-// import { logInService } from "@/services/authService";
+import authService from "@/services/authService";
+
 
 const Login = () => {
     const { toast } = useToast();
@@ -47,9 +48,8 @@ const Login = () => {
         }
 
         try {
-            // Uncomment and implement the login service call
-            // const response = await logInService(formData);
-
+            const response = await authService.login(formData);
+            
             if (response?.success) {
                 toast({
                     title: "Success",
