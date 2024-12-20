@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 const cookieService = {
     // Set a cookie with name, value, and options
     setCookie: (name, value, options = { expires: 1, path: "/" }) => {
-        const isSecure = window.location.protocol === "http:";
+        const isSecure = window.location.protocol === "https:";
 
         const cookieOptions = {
             ...options,
