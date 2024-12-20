@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 // ===== Services =====
 import authService from "@/services/authService";
 
-
 const Login = () => {
     const { toast } = useToast();
     const navigate = useNavigate();
@@ -36,7 +35,6 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const { email, password } = formData;
 
         if (!email || !password) {

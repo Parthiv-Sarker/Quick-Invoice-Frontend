@@ -2,11 +2,11 @@ import React from "react";
 import { useAuth } from "@/contexts/AuthContext";
 
 const Dashboard = () => {
-    const { user } = useAuth();
+    const { user, isLoading } = useAuth();
 
     return (
         <div>
-            Dashboard Home || <h1>Email: {user?.email}</h1>
+            Dashboard Home || { isLoading ? "Loading..." : user?.email }
         </div>
     );
 };
